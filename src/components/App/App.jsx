@@ -22,7 +22,7 @@ export class App extends Component {
         this.setState({ isLoading: true });
         const { images, totalHits } = await getImages(searchText, page);
         if (images.length === 0) {
-          Notify.failure('Nothing founded');
+          Notify.failure('Zero results. Try to search something else ');
           return;
         }
         this.setState(prevState => ({
@@ -43,7 +43,9 @@ export class App extends Component {
 
   setSearch = searchValue => {
     if (searchValue === '') {
-      Notify.failure('Nothing to search');
+      Notify.failure(
+        'You sure that you want to find nothing? just type in something if don*t'
+      );
       return;
     }
     this.setState({ searchText: searchValue, images: [], page: 1 });
